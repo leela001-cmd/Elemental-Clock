@@ -44,3 +44,6 @@
 <pre>/ec settings</pre>
 <p>Opens or closes the EC settings window.</p>
 
+<p align="center">
+  <img src="ec-2.png" alt="EC - Elemental Clock preview">
+</p>
