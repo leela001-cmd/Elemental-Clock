@@ -15,7 +15,6 @@ EC (Elemental Clock) displays real-time Vana'diel information in a single compac
 <li>• Weakness element (icon + text)</li>
 <br><br>
 <b>Adjustable:</b>
-<br>
 <li>• Window opacity</li>
 <li>• Content scale</li>
 <li>• Font and font size</li>
