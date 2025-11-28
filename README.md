@@ -6,24 +6,22 @@ Addon Type: Ashita v4+
 Description:
 EC (Elemental Clock) displays real-time Vana'diel information in a single compact UI line. It includes the current in-game time, weather, day, moon phase, moon trend, and the elemental weakness of the day. All elements support tooltips and customizable font/scale/visibility settings.
 
-Features
+<b>Features</b>
+<li>• Current Vana'diel time</li>
+<li>• Live weather with icon + tooltip</li>
+<li>• Day icon + optional colored text</li>
+<li>• Moon phase icon + percent + tooltip</li>
+<li>• Moon trend (waxing/waning arrow)</li>
+<li>• Weakness element (icon + text)</li>
 
-<ul>
-• Current Vana'diel time
-• Live weather with icon + tooltip
-• Day icon + optional colored text
-• Moon phase icon + percent + tooltip
-• Moon trend (waxing/waning arrow)
-• Weakness element (icon + text)
-</ul>
-Adjustable:
+<b>Adjustable:</b>
 
-• Window opacity
-• Content scale
-• Font and font size
-• Show/hide individual elements
-• Persistent settings saved to addons/ec/settings.lua
-• Uses ImGui for clean UI drawing
+<li>• Window opacity</li>
+<li>• Content scale</li>
+<li>• Font and font size</li>
+<li>• Show/hide individual elements</li>
+<li>• Persistent settings saved to addons/ec/settings.lua</li>
+<li>• Uses ImGui for clean UI drawing</li>
 
 Commands
 /ec settings
