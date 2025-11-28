@@ -8,13 +8,14 @@ EC (Elemental Clock) displays real-time Vana'diel information in a single compac
 
 Features
 
-<li>• Current Vana'diel time</li>
+<ul>
+• Current Vana'diel time
 • Live weather with icon + tooltip
 • Day icon + optional colored text
 • Moon phase icon + percent + tooltip
 • Moon trend (waxing/waning arrow)
 • Weakness element (icon + text)
-
+</ul>
 Adjustable:
 
 • Window opacity
