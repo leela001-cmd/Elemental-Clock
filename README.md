@@ -1,8 +1,9 @@
-EC - Elemental Clock
-
-Author: Lunem
-Version: 1.4
-Addon Type: Ashita v4+
+<h1>EC - Elemental Clock</h1>h1<br>
+<br>
+Author: Lunem<br>
+Version: 1.4<br>
+Addon Type: Ashita v4+<br>
+<br>
 Description:
 EC (Elemental Clock) displays real-time Vana'diel information in a single compact UI line. It includes the current in-game time, weather, day, moon phase, moon trend, and the elemental weakness of the day. All elements support tooltips and customizable font/scale/visibility settings.
 <br><br>
