@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 -- Name: EC
 -- Author: Lunem
--- Version: 1.4
+-- Version: 1.5
 -- Desc: Displays current in-game weather, day, time, and moon phase, with icon.
 -- Link: https://ashitaxi.com/
 -------------------------------------------------------------------------------
@@ -970,17 +970,23 @@ end)
 -- Command handler (/ec settings)
 ----------------------------------------------------------------
 ashita.events.register('command', 'ec_command', function(e)
-    local cmd = e.command:lower()
-
-    if not cmd:find('^/ec') then
+    local args = e.command:args()
+    if (#args == 0) then
         return
     end
 
-    local sub = cmd:match('^/ec%s+(%S+)') or ''
+    local cmd = args[1]:lower()
+    if cmd ~= '/ec' then
+        return
+    end
+
+    -- We are handling /ec now; block it from reaching the game.
+    e.blocked = true
+
+    local sub = args[2] and args[2]:lower() or ''
 
     if sub == 'settings' then
         showSettings = not showSettings
     end
-
-    e.blocked = true
 end)
+
