@@ -3,7 +3,7 @@
 -------------------------------------------------------------------------------
 -- Name: EC
 -- Author: Lunem
--- Version: 1.5
+-- Version: 1.6
 -- Desc: Displays current in-game weather, day, time, and moon phase, with icon.
 -- Link: https://ashitaxi.com/
 -------------------------------------------------------------------------------
@@ -28,6 +28,7 @@ local showMoon         = true
 local showDayText      = true
 local showOppElement   = true
 local showOppElemText  = true
+local showMoonPercent  = true
 
 -- Fonts: name + size for EC UI (clock + tooltips)
 local ec_font_name        = 'Lato'
@@ -36,17 +37,18 @@ local ec_font             = nil       -- used in EC window
 local ec_settings_font    = nil       -- fixed size, used only in settings
 
 local ec_settings = {
-    window_opacity   = windowOpacity,
-    content_scale    = contentScale,
-    show_clock       = showClock,
-    show_weather     = showWeather,
-    show_day         = showDay,
-    show_moon        = showMoon,
-    show_day_text    = showDayText,
-    show_opp_element = showOppElement,
-    show_opp_text    = showOppElemText,
-    font_name        = ec_font_name,
-    font_size        = ec_font_size,
+    window_opacity    = windowOpacity,
+    content_scale     = contentScale,
+    show_clock        = showClock,
+    show_weather      = showWeather,
+    show_day          = showDay,
+    show_moon         = showMoon,
+    show_moon_percent = showMoonPercent,
+    show_day_text     = showDayText,
+    show_opp_element  = showOppElement,
+    show_opp_text     = showOppElemText,
+    font_name         = ec_font_name,
+    font_size         = ec_font_size,
 }
 
 local function ec_get_settings_path()
@@ -87,6 +89,9 @@ local function ec_load_settings()
     if type(ec_settings.show_moon) == 'boolean' then
         showMoon = ec_settings.show_moon
     end
+    if type(ec_settings.show_moon_percent) == 'boolean' then
+        showMoonPercent = ec_settings.show_moon_percent
+    end
     if type(ec_settings.show_day_text) == 'boolean' then
         showDayText = ec_settings.show_day_text
     end
@@ -105,17 +110,18 @@ local function ec_load_settings()
 end
 
 local function ec_save_settings()
-    ec_settings.window_opacity   = windowOpacity
-    ec_settings.content_scale    = contentScale
-    ec_settings.show_clock       = showClock
-    ec_settings.show_weather     = showWeather
-    ec_settings.show_day         = showDay
-    ec_settings.show_moon        = showMoon
-    ec_settings.show_day_text    = showDayText
-    ec_settings.show_opp_element = showOppElement
-    ec_settings.show_opp_text    = showOppElemText
-    ec_settings.font_name        = ec_font_name
-    ec_settings.font_size        = ec_font_size
+    ec_settings.window_opacity    = windowOpacity
+    ec_settings.content_scale     = contentScale
+    ec_settings.show_clock        = showClock
+    ec_settings.show_weather      = showWeather
+    ec_settings.show_day          = showDay
+    ec_settings.show_moon         = showMoon
+    ec_settings.show_moon_percent = showMoonPercent
+    ec_settings.show_day_text     = showDayText
+    ec_settings.show_opp_element  = showOppElement
+    ec_settings.show_opp_text     = showOppElemText
+    ec_settings.font_name         = ec_font_name
+    ec_settings.font_size         = ec_font_size
 
     local path = ec_get_settings_path()
     local f, err = io.open(path, 'w+')
@@ -124,17 +130,18 @@ local function ec_save_settings()
     end
 
     f:write('return {\n')
-    f:write(string.format('    window_opacity   = %.3f,\n', ec_settings.window_opacity or 1.0))
-    f:write(string.format('    content_scale    = %.3f,\n', ec_settings.content_scale or 1.0))
-    f:write(string.format('    show_clock       = %s,\n', tostring(ec_settings.show_clock ~= false)))
-    f:write(string.format('    show_weather     = %s,\n', tostring(ec_settings.show_weather ~= false)))
-    f:write(string.format('    show_day         = %s,\n', tostring(ec_settings.show_day ~= false)))
-    f:write(string.format('    show_moon        = %s,\n', tostring(ec_settings.show_moon ~= false)))
-    f:write(string.format('    show_day_text    = %s,\n', tostring(ec_settings.show_day_text ~= false)))
-    f:write(string.format('    show_opp_element = %s,\n', tostring(ec_settings.show_opp_element ~= false)))
-    f:write(string.format('    show_opp_text    = %s,\n', tostring(ec_settings.show_opp_text ~= false)))
-    f:write(string.format('    font_name        = %q,\n', ec_settings.font_name or 'Lato'))
-    f:write(string.format('    font_size        = %d,\n', ec_settings.font_size or 21))
+    f:write(string.format('    window_opacity    = %.3f,\n', ec_settings.window_opacity or 1.0))
+    f:write(string.format('    content_scale     = %.3f,\n', ec_settings.content_scale or 1.0))
+    f:write(string.format('    show_clock        = %s,\n', tostring(ec_settings.show_clock ~= false)))
+    f:write(string.format('    show_weather      = %s,\n', tostring(ec_settings.show_weather ~= false)))
+    f:write(string.format('    show_day          = %s,\n', tostring(ec_settings.show_day ~= false)))
+    f:write(string.format('    show_moon         = %s,\n', tostring(ec_settings.show_moon ~= false)))
+    f:write(string.format('    show_moon_percent = %s,\n', tostring(ec_settings.show_moon_percent ~= false)))
+    f:write(string.format('    show_day_text     = %s,\n', tostring(ec_settings.show_day_text ~= false)))
+    f:write(string.format('    show_opp_element  = %s,\n', tostring(ec_settings.show_opp_element ~= false)))
+    f:write(string.format('    show_opp_text     = %s,\n', tostring(ec_settings.show_opp_text ~= false)))
+    f:write(string.format('    font_name         = %q,\n', ec_settings.font_name or 'Lato'))
+    f:write(string.format('    font_size         = %d,\n', ec_settings.font_size or 21))
     f:write('}\n')
     f:close()
 end
@@ -469,7 +476,6 @@ local WeaknessElementMap = {
     Dark      = 'Light',
 }
 
-
 -- Element icon files for Weakness element
 local elementIconFiles = {
     Fire      = 'fire.png',
@@ -698,7 +704,7 @@ ashita.events.register('d3d_present', 'ec_render', function()
         local oppElementName     = GetWeaknessElement()
         local oppElementIcon     = GetWeaknessElementIcon()
 
-        -- Single line: [time] [weather_icon] [day_icon(+text)] [moon_icon] [arrow] [weakness_icon(+text)]
+        -- Single line: [time] [weather_icon] [day_icon(+text)] [moon_icon(+%)] [arrow] [weakness_icon(+text)]
 
         -- Time text first (if enabled)
         if showClock then
@@ -764,6 +770,15 @@ ashita.events.register('d3d_present', 'ec_render', function()
                     imgui.EndTooltip()
                 end
             end
+
+            -- Inline moon percent text next to the moon icon
+        if showMoonPercent and moonPct then
+            if imgui.SameLine then
+                imgui.SameLine()
+            end
+            imgui.TextUnformatted(string.format('%d%%', moonPct))
+        end
+
 
             if moonTrendIcon then
                 if imgui.SameLine then
@@ -934,6 +949,12 @@ ashita.events.register('d3d_present', 'ec_render', function()
                 ec_save_settings()
             end
 
+            local chkMoonPct = { showMoonPercent }
+            if imgui.Checkbox('Show Moon %', chkMoonPct) then
+                showMoonPercent = chkMoonPct[1] and true or false
+                ec_save_settings()
+            end
+
             local chkOppElem = { showOppElement }
             if imgui.Checkbox('Show Weakness Element', chkOppElem) then
                 showOppElement = chkOppElem[1] and true or false
@@ -965,7 +986,6 @@ ashita.events.register('d3d_present', 'ec_render', function()
     end
 end)
 
-
 ----------------------------------------------------------------
 -- Command handler (/ec settings)
 ----------------------------------------------------------------
@@ -989,4 +1009,3 @@ ashita.events.register('command', 'ec_command', function(e)
         showSettings = not showSettings
     end
 end)
-
