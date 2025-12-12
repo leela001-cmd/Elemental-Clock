@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>Author:</b> Lunem &nbsp;•&nbsp;
-  <b>Version:</b> 1.4 &nbsp;•&nbsp;
+  <b>Version:</b> 1.6 &nbsp;•&nbsp;
   <b>Addon Type:</b> Ashita v4+
 </p>
 
@@ -47,3 +47,14 @@
 <p align="center">
   <img src="ec-2.png" alt="EC - Elemental Clock preview">
 </p>
+
+<hr>
+
+<h2>Updates</h2>
+
+<h3>v1.6</h3>
+<ul>
+  <li>Added optional moon percent display next to the moon icon (<code>Show Moon %</code> setting).</li>
+  <li>Persist moon percent visibility in <code>settings.lua</code> alongside other EC options.</li>
+  <li>Minor UI tweaks to keep the clock line compact and readable.</li>
+</ul>
